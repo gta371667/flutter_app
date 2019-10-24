@@ -1,10 +1,11 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/route/hero.dart';
+import 'package:flutter_app/route/hero_dialog_route.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
 import 'package:flutter_app/widget/test_animation.dart';
-
 import 'package:flutter_app/widget/water_animated_widget.dart';
 
 @ARoute(url: RouteName.page1)
@@ -39,8 +40,29 @@ class _Page1State extends State<Page1> with RouteMixin {
       drawerEdgeDragWidth: 100,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-//          pop(context, result: "aasdf");
           _changeAlignment();
+
+          Navigator.push(
+            context,
+            new HeroDialogRoute(
+              builder: (BuildContext context) {
+                return FractionallySizedBox(
+                  widthFactor: 0.8,
+                  heightFactor: 0.3,
+                  alignment: Alignment.center,
+                  child: Container(
+                    color: Colors.yellow,
+                    child: Hero(
+                      tag: HeroTag.flutterLogo,
+                      child: FlutterLogo(
+                        size: 100,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
@@ -58,6 +80,12 @@ class _Page1State extends State<Page1> with RouteMixin {
               onTap: () {
                 pushPage(RouteName.page2, context, blocQuery: {"key1": "test1"});
               },
+            ),
+          ),
+          Hero(
+            tag: HeroTag.flutterLogo,
+            child: FlutterLogo(
+              size: 300,
             ),
           ),
           TestAnimationWidget(),

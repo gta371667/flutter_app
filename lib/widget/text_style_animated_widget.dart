@@ -48,7 +48,7 @@ class _TestState extends AnimatedWidgetBaseState<TextStyleAnimatedWidget> {
   }
 
   @override
-  void forEachTween(visitor) {
+  void forEachTween(TweenVisitor<dynamic> visitor) {
     print("TestWidget forEachTween");
     _style = visitor(_style, widget.style, (dynamic value) => TextStyleTween(begin: value));
   }

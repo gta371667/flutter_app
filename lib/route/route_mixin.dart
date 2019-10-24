@@ -18,14 +18,17 @@ mixin RouteMixin {
     Map<String, dynamic> blocQuery,
     bool pushAndReplace = false,
     bool Function(String route) pushAndRemoveUntil,
+    PageRoute<T> pageRoute,
   }) {
     var navigator = Navigator.of(context);
     var pageWidget = _getPage(routeName, blocQuery);
 
-    MaterialPageRoute<T> pageRoute = MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (BuildContext context) => pageWidget,
-    );
+    if (pageRoute == null) {
+      pageRoute = MaterialPageRoute<T>(
+        settings: RouteSettings(name: routeName),
+        builder: (BuildContext context) => pageWidget,
+      );
+    }
 
     if (pushAndRemoveUntil != null) {
       return navigator.pushAndRemoveUntil(pageRoute, (rt) {
