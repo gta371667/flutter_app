@@ -4,44 +4,106 @@ import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
 
+import 'package:flutter_app/widget/text_style_animated_widget.dart';
+
 @ARoute(url: RouteName.page2)
-class Page2 extends StatelessWidget with RouteMixin {
+class Page2 extends StatefulWidget {
   final MyRouteOption option;
 
   Page2(this.option) : super();
 
   @override
+  _Page2State createState() => _Page2State();
+}
+
+class _Page2State extends State<Page2> with RouteMixin {
+  int currentIndex = 0;
+
+  List<Step> steps = [
+    Step(
+      title: Text("title"),
+      content: Text("content"),
+      isActive: true,
+//      subtitle: Text("subTitle"),
+//      state: StepState.complete
+    ),
+    Step(
+        title: Text("title"),
+        content: Text("content"),
+        isActive: true,
+        subtitle: Text("subTitle"),
+        state: StepState.indexed),
+    Step(
+        title: Text("title"),
+        content: Text("content"),
+        isActive: true,
+        subtitle: Text("subTitle"),
+        state: StepState.disabled),
+    Step(
+        title: Text("title"),
+        content: Text("content"),
+        isActive: true,
+        subtitle: Text("subTitle"),
+        state: StepState.error),
+    Step(
+        title: Text("title"),
+        content: Text("content"),
+        isActive: true,
+        subtitle: Text("subTitle"),
+        state: StepState.editing),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pushPage(RouteName.page3, context, blocQuery: {"key1": "test1"});
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
       body: Container(
         alignment: Alignment.center,
-        child: GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("page2"),
-          ),
-          onTap: () {
-//            Navigator.of(context).pushAndRemoveUntil(
-//              MaterialPageRoute(
-//                  builder: (BuildContext context) => AppRouter.getPage(RouteName.page3, {"key2": "test2"})),
-//              ModalRoute.withName(RouteName.page1),
-//            );
-
-//            Navigator.of(context).popUntil(ModalRoute.withName("/"));
-
-            pushPage(RouteName.page3, context, blocQuery: {"key1": "test1"});
-
-//            Navigator.of(context).push(
-//              MaterialPageRoute(
-//                settings: RouteSettings(name: RouteName.page3),
-//                builder: (BuildContext context) => AppRouter.getPage(
-//                  RouteName.page3,
-//                  {"key3": "test3"},
-//                ),
-//              ),
-//            );
-          },
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text("page2"),
+            ),
+            TextStyleAnimatedWidget(
+              style: currentIndex == 0
+                  ? TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 30,
+                    )
+                  : TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+              duration: Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn,
+              child: Text("asdaskdjlaksd"),
+            ),
+            Expanded(
+              child: Stepper(
+                steps: steps,
+                currentStep: currentIndex,
+                onStepTapped: (index) {
+                  print("onStepTapped $index");
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

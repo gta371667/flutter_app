@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
+import 'package:flutter_app/widget/test_animation.dart';
+
+import 'package:flutter_app/widget/water_animated_widget.dart';
 
 @ARoute(url: RouteName.page1)
 class Page1 extends StatefulWidget {
@@ -15,6 +18,14 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> with RouteMixin {
+  AlignmentGeometry _alignment = Alignment.topRight;
+
+  void _changeAlignment() {
+    setState(() {
+      _alignment = _alignment == Alignment.topRight ? Alignment.bottomLeft : Alignment.topRight;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -23,15 +34,18 @@ class _Page1State extends State<Page1> with RouteMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: buildDrawer(),
+      drawerScrimColor: Colors.yellow,
+      drawerEdgeDragWidth: 100,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          pop(context, result: "aasdf");
+//          pop(context, result: "aasdf");
+          _changeAlignment();
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
       appBar: AppBar(),
-
       body: Column(
         children: <Widget>[
           Container(
@@ -46,19 +60,138 @@ class _Page1State extends State<Page1> with RouteMixin {
               },
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 100,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("test $index"),
-                );
-              },
-            ),
-          ),
+          TestAnimationWidget(),
+          buildCg4(),
+//          Expanded(
+//            child: CustomScrollView(
+//              slivers: <Widget>[
+//                buildSliverAppBar(),
+////                buildSliverGrid(),
+////                SliverPersistentHeader(
+////                  pinned: true,
+////                  floating: true,
+////                  delegate: SliverAppBarDelegate(
+////                    minHeight: 0.0,
+////                    floating: true,
+////                    pinned: true,
+////                    maxHeight: 180.0,
+////                    child: Container(
+////                      child: Image.asset(
+////                        "assets/images/bg_login.png",
+////                        fit: BoxFit.fill,
+////                      ),
+////                    ),
+////                  ),
+////                ),
+//                SliverFillViewport(
+//                  viewportFraction: 1,
+//                  delegate: SliverChildListDelegate(
+//                    [
+//                      Container(
+//                        child: Text("aaaa"),
+//                        color: Colors.red,
+//                        alignment: Alignment.center,
+//                      ),
+//                      Container(
+//                        child: Text("aaaa"),
+//                        color: Colors.yellow,
+//                        alignment: Alignment.center,
+//                      ),
+//                      Container(
+//                        child: Text("aaaa"),
+//                        color: Colors.red,
+//                        alignment: Alignment.center,
+//                      ),
+//                      Container(
+//                        child: Text("aaaa"),
+//                        color: Colors.yellow,
+//                        alignment: Alignment.center,
+//                      ),
+//                      Container(
+//                        child: Text("aaaa"),
+//                        color: Colors.red,
+//                        alignment: Alignment.center,
+//                      ),
+//                    ],
+//                  ),
+//                ),
+////                SliverFillRemaining(
+////                  fillOverscroll: false,
+////                  hasScrollBody: true,
+////                  child: Text("aaaa"),
+////                )
+//              ],
+//            ),
+//          ),
         ],
+      ),
+    );
+  }
+
+  SliverGrid buildSliverGrid() {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          StatefulBuilder(builder: (c, state) {
+            return Text("aa");
+          });
+          showDialog(context: null);
+
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("test $index"),
+          );
+        },
+        childCount: 100,
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+    );
+  }
+
+  SliverAppBar buildSliverAppBar() {
+    return SliverAppBar(
+      title: Text("title"),
+      expandedHeight: 150,
+      backgroundColor: Colors.yellow,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        background: Container(color: Colors.red),
+        title: Container(
+          color: Colors.black,
+          child: Text("FlexibleSpaceBar"),
+        ),
+        centerTitle: true,
+      ),
+      forceElevated: true,
+//      snap: true,
+//      floating: true,
+      pinned: true,
+    );
+  }
+
+  Widget buildDrawer() {
+    return Container(
+      color: Colors.blue,
+      width: 200,
+    );
+  }
+
+  Widget buildCg4() {
+    return Expanded(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return EnterAnimationWidget(
+            multipleAnimationController: true,
+            direction: AxisDirection.left,
+            curve: Curves.easeOut,
+            duration: Duration(milliseconds: 1000),
+            child: Container(
+              margin: EdgeInsets.all(10),
+              color: Colors.blueAccent,
+              child: Text("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+            ),
+          );
+        },
       ),
     );
   }
