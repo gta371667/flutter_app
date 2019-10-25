@@ -1,10 +1,10 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/page2_bloc.dart';
+import 'package:flutter_app/route/bloc_provider.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
-import 'package:flutter_app/widget/test_animation.dart';
-
 import 'package:flutter_app/widget/text_style_animated_widget.dart';
 
 @ARoute(url: RouteName.page2)
@@ -18,6 +18,7 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> with RouteMixin {
+  Page2Bloc bloc;
   int currentIndex = 0;
 
   List<Step> steps = [
@@ -56,6 +57,7 @@ class _Page2State extends State<Page2> with RouteMixin {
 
   @override
   void initState() {
+    bloc = BlocProvider.of<Page2Bloc>(context);
     super.initState();
   }
 
@@ -76,38 +78,40 @@ class _Page2State extends State<Page2> with RouteMixin {
           children: <Widget>[
             Hero(
               tag: "testHeroTag",
-              child: FlutterLogo(size: 100,),
+              child: FlutterLogo(
+                size: 100,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text("page2"),
             ),
-//            TextStyleAnimatedWidget(
-//              style: currentIndex == 0
-//                  ? TextStyle(
-//                      color: Colors.blueAccent,
-//                      fontSize: 30,
-//                    )
-//                  : TextStyle(
-//                      color: Colors.red,
-//                      fontSize: 16,
-//                    ),
-//              duration: Duration(seconds: 1),
-//              curve: Curves.fastOutSlowIn,
-//              child: Text("asdaskdjlaksd"),
-//            ),
-//            Expanded(
-//              child: Stepper(
-//                steps: steps,
-//                currentStep: currentIndex,
-//                onStepTapped: (index) {
-//                  print("onStepTapped $index");
-//                  setState(() {
-//                    currentIndex = index;
-//                  });
-//                },
-//              ),
-//            ),
+            TextStyleAnimatedWidget(
+              style: currentIndex == 0
+                  ? TextStyle(
+                      color: Colors.blueAccent,
+                      fontSize: 30,
+                    )
+                  : TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+              duration: Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn,
+              child: Text("asdaskdjlaksd"),
+            ),
+            Expanded(
+              child: Stepper(
+                steps: steps,
+                currentStep: currentIndex,
+                onStepTapped: (index) {
+                  print("onStepTapped $index");
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+              ),
+            ),
           ],
         ),
       ),

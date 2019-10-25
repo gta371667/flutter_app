@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/route/route_mixin.dart';
 
 import 'route/my_route.dart';
 import 'route/route_name.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with RouteMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,9 +17,8 @@ class MyApp extends StatelessWidget {
 //      home: MyHomePage(title: 'Flutter Demo Home Page'),
 //      initialRoute: RouteName.page1,
 //      routes: {RouteName.page1: (context) => AppRouter.getPage(RouteName.page1, null)},
-
       /// route history routeName = "/"
-      home: AppRouter.getPage(RouteName.page1, null),
+      home: getPage(RouteName.page1),
     );
   }
 }

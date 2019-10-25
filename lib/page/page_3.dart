@@ -1,48 +1,158 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/page3_bloc.dart';
+import 'package:flutter_app/route/bloc_provider.dart';
+import 'package:flutter_app/route/hero_dialog_route.dart';
+import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
+import 'package:flutter_app/widget/hero_dialog_widget.dart';
+import 'package:flutter_app/widget/sliver_appBar_delegate.dart';
 
 @ARoute(url: RouteName.page3)
-class Page3 extends StatelessWidget with RouteMixin {
+class Page3 extends StatefulWidget {
   final MyRouteOption option;
 
   Page3(this.option) : super();
 
   @override
+  _Page3State createState() => _Page3State();
+}
+
+class _Page3State extends State<Page3> with RouteMixin {
+  Page3Bloc bloc;
+
+  @override
+  void initState() {
+    bloc = BlocProvider.of<Page3Bloc>(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        alignment: Alignment.center,
-        child: GestureDetector(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text("page3"),
-          ),
-          onTap: () {
-//            Navigator.of(context).pushAndRemoveUntil(
-//              MaterialPageRoute(
-//                  builder: (BuildContext context) => AppRouter.getPage(RouteName.page1, {"key2": "test2"})),
-//              ModalRoute.withName(RouteName.page1),
-//            );
-
-//            pushPage(RouteName.page1, context, pushAndRemoveUntil: (v) => v == "/");
-
-            pop(context, popUntil: (v) => v == "/");
-
-//            Navigator.of(context).push(
-//              MaterialPageRoute(
-//                builder: (BuildContext context) => AppRouter.getPage(
-//                  RouteName.page1,
-//                  {"key2": "test2"},
-//                ),
-//              ),
-//            );
-          },
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pop(context, popUntil: (v) => v == "/");
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
       ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          buildSliverAppBar(),
+          buildSliverGrid(),
+          SliverPersistentHeader(
+            pinned: true,
+            floating: true,
+            delegate: SliverAppBarDelegate(
+              minHeight: 0.0,
+              floating: true,
+              pinned: true,
+              maxHeight: 180.0,
+              child: Container(
+                child: Image.asset(
+                  "assets/images/bg_login.png",
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SliverAppBar buildSliverAppBar() {
+    return SliverAppBar(
+      title: Text("title"),
+      actions: <Widget>[
+        Hero(
+          tag: HeroTag.favorite,
+          child: Container(
+            margin: EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(Icons.favorite),
+              onPressed: () {
+                print("6666666666666");
+              },
+            ),
+          ),
+        ),
+      ],
+      expandedHeight: 150,
+      backgroundColor: Colors.yellow,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.pin,
+        background: Container(color: Colors.red),
+        title: Container(
+          color: Colors.black,
+          child: Text("FlexibleSpaceBar"),
+        ),
+        centerTitle: true,
+      ),
+      forceElevated: true,
+      snap: true,
+      floating: true,
+      pinned: true,
+    );
+  }
+
+  SliverGrid buildSliverGrid() {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          StatefulBuilder(builder: (c, state) {
+            return Text("aa");
+          });
+          return InkWell(
+            onTap: () {
+              bloc.setHeroTag("${HeroTag.flutterLogo}$index");
+
+              Navigator.push(
+                context,
+                new HeroDialogRoute(
+                  builder: (BuildContext context) => HeroDialogWidget(
+                    bloc: bloc,
+                    heroTag: "${HeroTag.flutterLogo}$index",
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Hero(
+                flightShuttleBuilder: (
+                  flightContext,
+                  animation,
+                  direction,
+                  fromContext,
+                  toContext,
+                ) {
+                  return Icon(
+                    Icons.code,
+                    size: 50.0,
+                  );
+                },
+                transitionOnUserGestures: true,
+                placeholderBuilder: (context, size, widget) {
+                  return Container(
+//                    color: Colors.deepOrange,
+                    child: widget,
+                  );
+                },
+                tag: "${HeroTag.flutterLogo}$index",
+                child: FlutterLogo(
+                  size: 50,
+                ),
+              ),
+            ),
+          );
+        },
+        childCount: 100,
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
     );
   }
 }

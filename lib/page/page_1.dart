@@ -1,6 +1,8 @@
 import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/route/hero.dart';
+import 'package:flutter_app/bloc/page1_bloc.dart';
+import 'package:flutter_app/route/bloc_provider.dart';
+import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/hero_dialog_route.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
@@ -19,6 +21,7 @@ class Page1 extends StatefulWidget {
 }
 
 class _Page1State extends State<Page1> with RouteMixin {
+  Page1Bloc bloc;
   AlignmentGeometry _alignment = Alignment.topRight;
 
   void _changeAlignment() {
@@ -29,6 +32,7 @@ class _Page1State extends State<Page1> with RouteMixin {
 
   @override
   void initState() {
+    bloc = BlocProvider.of<Page1Bloc>(context);
     super.initState();
   }
 
@@ -82,75 +86,8 @@ class _Page1State extends State<Page1> with RouteMixin {
               },
             ),
           ),
-          Hero(
-            tag: HeroTag.flutterLogo,
-            child: FlutterLogo(
-              size: 300,
-            ),
-          ),
           TestAnimationWidget(),
           buildCg4(),
-//          Expanded(
-//            child: CustomScrollView(
-//              slivers: <Widget>[
-//                buildSliverAppBar(),
-////                buildSliverGrid(),
-////                SliverPersistentHeader(
-////                  pinned: true,
-////                  floating: true,
-////                  delegate: SliverAppBarDelegate(
-////                    minHeight: 0.0,
-////                    floating: true,
-////                    pinned: true,
-////                    maxHeight: 180.0,
-////                    child: Container(
-////                      child: Image.asset(
-////                        "assets/images/bg_login.png",
-////                        fit: BoxFit.fill,
-////                      ),
-////                    ),
-////                  ),
-////                ),
-//                SliverFillViewport(
-//                  viewportFraction: 1,
-//                  delegate: SliverChildListDelegate(
-//                    [
-//                      Container(
-//                        child: Text("aaaa"),
-//                        color: Colors.red,
-//                        alignment: Alignment.center,
-//                      ),
-//                      Container(
-//                        child: Text("aaaa"),
-//                        color: Colors.yellow,
-//                        alignment: Alignment.center,
-//                      ),
-//                      Container(
-//                        child: Text("aaaa"),
-//                        color: Colors.red,
-//                        alignment: Alignment.center,
-//                      ),
-//                      Container(
-//                        child: Text("aaaa"),
-//                        color: Colors.yellow,
-//                        alignment: Alignment.center,
-//                      ),
-//                      Container(
-//                        child: Text("aaaa"),
-//                        color: Colors.red,
-//                        alignment: Alignment.center,
-//                      ),
-//                    ],
-//                  ),
-//                ),
-////                SliverFillRemaining(
-////                  fillOverscroll: false,
-////                  hasScrollBody: true,
-////                  child: Text("aaaa"),
-////                )
-//              ],
-//            ),
-//          ),
         ],
       ),
     );

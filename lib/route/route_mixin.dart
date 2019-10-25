@@ -74,6 +74,15 @@ mixin RouteMixin {
     }
   }
 
+  Widget getPage(
+    String route, {
+    Map<String, dynamic> pageQuery,
+    Map<String, dynamic> blocQuery,
+    bool entryPoint = false,
+  }) {
+    return _getPage(route, blocQuery);
+  }
+
   Widget _getPage(String routeName, Map<String, dynamic> query) {
     final child = AppRouter.getPage(routeName, query);
 

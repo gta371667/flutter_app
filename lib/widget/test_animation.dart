@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/route/hero_tag.dart';
 
 class TestAnimationWidget extends StatefulWidget {
   @override
@@ -72,13 +73,16 @@ class _TestAnimationWidgetState extends State<TestAnimationWidget> with SingleTi
   }
 
   Widget buildCg3() {
-    return AnimatedContainer(
-      duration: Duration(seconds: 1),
-      height: selected3 ? 100 : 200,
-      width: selected3 ? 100 : 200,
-      transform: Matrix4.rotationX(selected3 ? 1 : 0),
-      child: FlutterLogo(
-        size: 50,
+    return Hero(
+      tag: HeroTag.flutterLogo,
+      child: AnimatedContainer(
+        duration: Duration(seconds: 1),
+        height: selected3 ? 100 : 200,
+        width: selected3 ? 100 : 200,
+        transform: Matrix4.rotationX(selected3 ? 1 : 0),
+        child: FlutterLogo(
+          size: 50,
+        ),
       ),
     );
   }
