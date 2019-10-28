@@ -112,7 +112,7 @@ abstract class _EnterState extends State<EnterAnimationWidget> implements Ticker
       }
 
       if (widget.direction != null) {
-        getWidgetRect(context).then((rect) {
+        WidgetTools.getWidgetRect(context).then((rect) {
           if (rect != null) {
             Offset beginOffset;
             switch (widget.direction) {

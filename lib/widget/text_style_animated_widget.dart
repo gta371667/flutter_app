@@ -36,7 +36,6 @@ class _TestState extends AnimatedWidgetBaseState<TextStyleAnimatedWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print("TestWidget build");
     return DefaultTextStyle(
       style: _style.evaluate(animation),
       textAlign: widget.textAlign,
@@ -49,7 +48,6 @@ class _TestState extends AnimatedWidgetBaseState<TextStyleAnimatedWidget> {
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    print("TestWidget forEachTween");
     _style = visitor(_style, widget.style, (dynamic value) => TextStyleTween(begin: value));
   }
 }

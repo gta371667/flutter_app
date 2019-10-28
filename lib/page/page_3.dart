@@ -23,10 +23,21 @@ class Page3 extends StatefulWidget {
 class _Page3State extends State<Page3> with RouteMixin {
   Page3Bloc bloc;
 
+  GlobalKey<_Page3State> _containerKey = GlobalKey();
+  Offset iconOffset = Offset.zero;
+
   @override
   void initState() {
     bloc = BlocProvider.of<Page3Bloc>(context);
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((a) {
+      RenderBox renderBox = _containerKey.currentContext.findRenderObject();
+      if (renderBox != null) {
+        iconOffset = renderBox.localToGlobal(Offset.zero);
+        print("iconOffset ${iconOffset.toString()}");
+      }
+    });
   }
 
   @override
@@ -71,6 +82,7 @@ class _Page3State extends State<Page3> with RouteMixin {
         Hero(
           tag: HeroTag.favorite,
           child: Container(
+            key: _containerKey,
             margin: EdgeInsets.only(right: 10),
             child: IconButton(
               icon: Icon(Icons.favorite),
@@ -116,6 +128,7 @@ class _Page3State extends State<Page3> with RouteMixin {
                   builder: (BuildContext context) => HeroDialogWidget(
                     bloc: bloc,
                     heroTag: "${HeroTag.flutterLogo}$index",
+                    iconOffset: iconOffset,
                   ),
                 ),
               );
