@@ -46,6 +46,7 @@ class _HeroDialogWidgetState extends State<HeroDialogWidget> with SingleTickerPr
 
     WidgetTools.getWidgetLocalOffset(_containerKey).then((widgetOffset) {
       if (Offset != null) {
+        /// 計算偏移量
         var toOffset = widget.iconOffset - widgetOffset - Offset(10, 10);
 
         _offsetTween = Tween<Offset>(begin: Offset.zero, end: toOffset);
@@ -103,7 +104,7 @@ class _HeroDialogWidgetState extends State<HeroDialogWidget> with SingleTickerPr
             FlatButton(
               color: Colors.yellow,
               onPressed: () {
-                _controller.reset();
+                _controller.reverse();
                 _controller.forward();
               },
               child: Text("buy"),

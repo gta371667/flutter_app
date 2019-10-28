@@ -151,7 +151,7 @@ class _Page3State extends State<Page3> with RouteMixin {
                 transitionOnUserGestures: true,
                 placeholderBuilder: (context, size, widget) {
                   return Container(
-//                    color: Colors.deepOrange,
+                    color: Colors.deepOrange,
                     child: widget,
                   );
                 },
