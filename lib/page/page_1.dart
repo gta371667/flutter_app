@@ -7,9 +7,7 @@ import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
-import 'package:flutter_app/widget/test_aaaa.dart';
 import 'package:flutter_app/widget/test_animation.dart';
-import 'package:flutter_app/widget/transform_widget.dart';
 import 'package:flutter_app/widget/water_animated_widget.dart';
 
 @ARoute(url: RouteName.page1)
@@ -24,15 +22,7 @@ class Page1 extends StatefulWidget {
 
 class _Page1State extends State<Page1> with RouteMixin {
   Page1Bloc bloc;
-  AlignmentGeometry _alignment = Alignment.topRight;
   AnimationController testCallBackController;
-  double _width = 200.0;
-
-  void _changeAlignment() {
-    setState(() {
-      _alignment = _alignment == Alignment.topRight ? Alignment.bottomLeft : Alignment.topRight;
-    });
-  }
 
   @override
   void initState() {
@@ -48,8 +38,6 @@ class _Page1State extends State<Page1> with RouteMixin {
       drawerEdgeDragWidth: 100,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _changeAlignment();
-
           Navigator.push(
             context,
             new HeroDialogRoute(
@@ -81,14 +69,27 @@ class _Page1State extends State<Page1> with RouteMixin {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            child: GestureDetector(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text("page1"),
-              ),
-              onTap: () {
-                pushPage(RouteName.page2, context, blocQuery: {"key1": "test1"});
-              },
+            child: Row(
+              children: <Widget>[
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text("page1"),
+                  ),
+                  onTap: () {
+                    pushPage(RouteName.page2, context, blocQuery: {"key1": "test1"});
+                  },
+                ),
+                GestureDetector(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text("page4"),
+                  ),
+                  onTap: () {
+                    pushPage(RouteName.page4, context, blocQuery: {"key1": "test1"});
+                  },
+                ),
+              ],
             ),
           ),
 //          TransformWidget(),
@@ -112,7 +113,6 @@ class _Page1State extends State<Page1> with RouteMixin {
         ],
       ),
     );
-
   }
 
   Widget buildDrawer() {

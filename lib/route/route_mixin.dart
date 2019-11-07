@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/page1_bloc.dart';
 import 'package:flutter_app/bloc/page2_bloc.dart';
 import 'package:flutter_app/bloc/page3_bloc.dart';
+import 'package:flutter_app/bloc/page4_bloc.dart';
 
 import 'bloc_provider.dart';
 import 'my_route.dart';
@@ -101,6 +102,11 @@ mixin RouteMixin {
         return BlocProvider(
           child: child,
           bloc: Page3Bloc(BlocOption(query)),
+        );
+      case RouteName.page4:
+        return BlocProvider(
+          child: child,
+          bloc: Page4Bloc(BlocOption(query)),
         );
       default:
         throw ("RouteMixin 無找到對應Page");

@@ -52,7 +52,7 @@ class _Page3State extends State<Page3> with RouteMixin {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-//          buildSliverAppBar(),
+          buildSliverAppBar(),
           SliverPersistentHeader(
             pinned: true,
             floating: true,
@@ -122,19 +122,16 @@ class _Page3State extends State<Page3> with RouteMixin {
             onTap: () {
               bloc.setHeroTag("${HeroTag.flutterLogo}$index");
 
-              var a = ModalRoute.of(context);
-              var b = ModalRoute.of(context);
-
-//              Navigator.push(
-//                context,
-//                new HeroDialogRoute(
-//                  builder: (BuildContext context) => HeroDialogWidget(
-//                    bloc: bloc,
-//                    heroTag: "${HeroTag.flutterLogo}$index",
-//                    iconOffset: iconOffset,
-//                  ),
-//                ),
-//              );
+              Navigator.push(
+                context,
+                new HeroDialogRoute(
+                  builder: (BuildContext context) => HeroDialogWidget(
+                    bloc: bloc,
+                    heroTag: "${HeroTag.flutterLogo}$index",
+                    iconOffset: iconOffset,
+                  ),
+                ),
+              );
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),

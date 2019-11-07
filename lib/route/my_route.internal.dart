@@ -6,6 +6,7 @@
 
 import 'dart:convert';
 import 'package:annotation_route/route.dart';
+import 'package:flutter_app/page/page_4.dart';
 import 'package:flutter_app/page/page_2.dart';
 import 'package:flutter_app/page/page_1.dart';
 import 'package:flutter_app/page/page_3.dart';
@@ -14,6 +15,9 @@ class ARouterInternalImpl extends ARouterInternal {
   ARouterInternalImpl();
   final Map<String, List<Map<String, dynamic>>> innerRouterMap =
       <String, List<Map<String, dynamic>>>{
+    '/page4': [
+      {'clazz': Page4}
+    ],
     '/page2': [
       {'clazz': Page2}
     ],
@@ -46,6 +50,8 @@ class ARouterInternalImpl extends ARouterInternal {
 
   dynamic instanceFromClazz(Type clazz, dynamic option) {
     switch (clazz) {
+      case Page4:
+        return new Page4(option);
       case Page2:
         return new Page2(option);
       case Page1:
