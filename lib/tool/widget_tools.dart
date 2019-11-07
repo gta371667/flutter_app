@@ -6,6 +6,14 @@ class WidgetTools {
   static Future<Rect> getWidgetRect(BuildContext context) {
     Rect rect = Rect.zero;
 
+    return Future.delayed(Duration(milliseconds: 100), () {
+      var renderObject = context.findRenderObject();
+      if (renderObject != null) {
+        rect = renderObject.paintBounds;
+      }
+      return rect;
+    });
+
     return Future.microtask(() {
       var renderObject = context.findRenderObject();
       if (renderObject != null) {

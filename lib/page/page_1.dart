@@ -2,12 +2,14 @@ import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/page1_bloc.dart';
 import 'package:flutter_app/route/bloc_provider.dart';
-import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/hero_dialog_route.dart';
+import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
+import 'package:flutter_app/widget/test_aaaa.dart';
 import 'package:flutter_app/widget/test_animation.dart';
+import 'package:flutter_app/widget/transform_widget.dart';
 import 'package:flutter_app/widget/water_animated_widget.dart';
 
 @ARoute(url: RouteName.page1)
@@ -23,6 +25,8 @@ class Page1 extends StatefulWidget {
 class _Page1State extends State<Page1> with RouteMixin {
   Page1Bloc bloc;
   AlignmentGeometry _alignment = Alignment.topRight;
+  AnimationController testCallBackController;
+  double _width = 200.0;
 
   void _changeAlignment() {
     setState(() {
@@ -73,6 +77,7 @@ class _Page1State extends State<Page1> with RouteMixin {
       ),
       appBar: AppBar(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
             alignment: Alignment.center,
@@ -86,52 +91,28 @@ class _Page1State extends State<Page1> with RouteMixin {
               },
             ),
           ),
+//          TransformWidget(),
+//          GestureDetector(
+//            onScaleUpdate: (details) {
+//              print("onScaleUpdate ${details.toString()}");
+//              setState(() {
+//                //缩放倍数在0.8到10倍之间
+//                _width = 200 * details.scale.clamp(.8, 2.0);
+//              });
+//            },
+//            child: Image.asset(
+//              "assets/images/gbf_bi.jpg",
+//              height: _width,
+//              width: _width,
+//              fit: BoxFit.fill,
+//            ),
+//          ),
           TestAnimationWidget(),
           buildCg4(),
         ],
       ),
     );
-  }
 
-  SliverGrid buildSliverGrid() {
-    return SliverGrid(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          StatefulBuilder(builder: (c, state) {
-            return Text("aa");
-          });
-          showDialog(context: null);
-
-          return Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("test $index"),
-          );
-        },
-        childCount: 100,
-      ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-    );
-  }
-
-  SliverAppBar buildSliverAppBar() {
-    return SliverAppBar(
-      title: Text("title"),
-      expandedHeight: 150,
-      backgroundColor: Colors.yellow,
-      flexibleSpace: FlexibleSpaceBar(
-        collapseMode: CollapseMode.pin,
-        background: Container(color: Colors.red),
-        title: Container(
-          color: Colors.black,
-          child: Text("FlexibleSpaceBar"),
-        ),
-        centerTitle: true,
-      ),
-      forceElevated: true,
-//      snap: true,
-//      floating: true,
-      pinned: true,
-    );
   }
 
   Widget buildDrawer() {

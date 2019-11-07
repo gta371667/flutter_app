@@ -2,6 +2,7 @@ import 'package:annotation_route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/page2_bloc.dart';
 import 'package:flutter_app/route/bloc_provider.dart';
+import 'package:flutter_app/route/hero_tag.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
@@ -77,7 +78,7 @@ class _Page2State extends State<Page2> with RouteMixin {
         child: Column(
           children: <Widget>[
             Hero(
-              tag: "testHeroTag",
+              tag: HeroTag.flutterLogo,
               child: FlutterLogo(
                 size: 100,
               ),
@@ -85,6 +86,18 @@ class _Page2State extends State<Page2> with RouteMixin {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text("page2"),
+            ),
+            AnimatedCrossFade(
+              firstChild: Container(height: 0.0),
+              secondChild: Container(
+                color: Colors.red,
+                child: Text("open"),
+              ),
+              firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+              secondCurve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+              sizeCurve: Curves.fastOutSlowIn,
+              crossFadeState: currentIndex == 0 ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+              duration: Duration(seconds: 1),
             ),
             TextStyleAnimatedWidget(
               style: currentIndex == 0

@@ -32,7 +32,7 @@ class _Page3State extends State<Page3> with RouteMixin {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((a) {
-      RenderBox renderBox = _containerKey.currentContext.findRenderObject();
+      RenderBox renderBox = _containerKey.currentContext?.findRenderObject();
       if (renderBox != null) {
         iconOffset = renderBox.localToGlobal(Offset.zero);
         print("iconOffset ${iconOffset.toString()}");
@@ -52,8 +52,7 @@ class _Page3State extends State<Page3> with RouteMixin {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          buildSliverAppBar(),
-          buildSliverGrid(),
+//          buildSliverAppBar(),
           SliverPersistentHeader(
             pinned: true,
             floating: true,
@@ -70,6 +69,7 @@ class _Page3State extends State<Page3> with RouteMixin {
               ),
             ),
           ),
+          buildSliverGrid(),
         ],
       ),
     );
@@ -122,16 +122,19 @@ class _Page3State extends State<Page3> with RouteMixin {
             onTap: () {
               bloc.setHeroTag("${HeroTag.flutterLogo}$index");
 
-              Navigator.push(
-                context,
-                new HeroDialogRoute(
-                  builder: (BuildContext context) => HeroDialogWidget(
-                    bloc: bloc,
-                    heroTag: "${HeroTag.flutterLogo}$index",
-                    iconOffset: iconOffset,
-                  ),
-                ),
-              );
+              var a = ModalRoute.of(context);
+              var b = ModalRoute.of(context);
+
+//              Navigator.push(
+//                context,
+//                new HeroDialogRoute(
+//                  builder: (BuildContext context) => HeroDialogWidget(
+//                    bloc: bloc,
+//                    heroTag: "${HeroTag.flutterLogo}$index",
+//                    iconOffset: iconOffset,
+//                  ),
+//                ),
+//              );
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
