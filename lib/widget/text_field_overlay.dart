@@ -31,7 +31,7 @@ class _TextFieldOverlayWidgetState extends State<TextFieldOverlayWidget> {
         Overlay.of(context).insert(_overlayEntry);
       } else {
         print("TextField 失去焦點");
-        _overlayEntry.remove();
+        _overlayEntry?.remove();
       }
     });
   }
@@ -42,44 +42,50 @@ class _TextFieldOverlayWidgetState extends State<TextFieldOverlayWidget> {
     var size = renderBox.size;
 
     return OverlayEntry(
-      builder: (context) => Positioned(
-        left: offset.dx,
-        top: offset.dy + size.height + 5.0,
-        width: size.width,
-        child: CompositedTransformFollower(
-          link: _layerLink,
-          showWhenUnlinked: false,
-          offset: Offset(0.0, size.height + 5.0),
-          child: Material(
-            elevation: 4.0,
-            child: ListView(
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: <Widget>[
-                ListTile(
-                  title: Text('Syria'),
-                  onTap: () {
-                    print('Syria Tapped');
-                  },
-                ),
-                ListTile(
-                  title: Text('Lebanon'),
-                  onTap: () {
-                    print('Lebanon Tapped');
-                  },
-                )
-              ],
+      builder: (context) {
+        return Positioned(
+          left: offset.dx,
+          top: offset.dy + size.height + 5.0,
+          width: size.width,
+          child: CompositedTransformFollower(
+            link: _layerLink,
+            showWhenUnlinked: false,
+            offset: Offset(0.0, size.height + 5.0),
+            child: Material(
+              elevation: 4.0,
+              child: ListView(
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                children: <Widget>[
+                  ListTile(
+                    title: Text('Syria'),
+                    onTap: () {
+                      print('Syria Tapped');
+                      _overlayEntry?.remove();
+                    },
+                  ),
+                  ListTile(
+                    title: Text('Lebanon'),
+                    onTap: () {
+                      print('Lebanon Tapped');
+                      _overlayEntry?.remove();
+                    },
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
   @override
   void dispose() {
-    _overlayEntry?.remove();
+    try {
+      _overlayEntry?.remove();
+    } catch (e) {}
     _focusNode?.dispose();
     super.dispose();
   }

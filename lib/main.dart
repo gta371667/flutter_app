@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget with RouteMixin {
             body1: TextStyle(fontSize: 36.0, fontFamily: 'Hind'),
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+        ),
         textTheme: TextTheme(
           headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
           title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
