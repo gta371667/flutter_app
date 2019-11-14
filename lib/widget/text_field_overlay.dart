@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// https://medium.com/saugo360/https-medium-com-saugo360-flutter-using-overlay-to-display-floating-widgets-2e6d0e8decb9
+/// flutter_typeahead
 class TextFieldOverlayWidget extends StatefulWidget {
   final InputDecoration decoration;
 
@@ -51,6 +53,7 @@ class _TextFieldOverlayWidgetState extends State<TextFieldOverlayWidget> {
           child: Material(
             elevation: 4.0,
             child: ListView(
+              physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               children: <Widget>[
@@ -77,7 +80,7 @@ class _TextFieldOverlayWidgetState extends State<TextFieldOverlayWidget> {
   @override
   void dispose() {
     _overlayEntry?.remove();
-    _focusNode.dispose();
+    _focusNode?.dispose();
     super.dispose();
   }
 

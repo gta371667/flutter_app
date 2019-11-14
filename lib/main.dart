@@ -13,6 +13,20 @@ class MyApp extends StatelessWidget with RouteMixin {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.red,
+          textTheme: TextTheme(
+//            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            body1: TextStyle(fontSize: 36.0, fontFamily: 'Hind'),
+          ),
+        ),
+        textTheme: TextTheme(
+          headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          body1: TextStyle(fontSize: 20.0, fontFamily: 'Hind'),
+          body2: TextStyle(fontSize: 40.0, fontFamily: 'Hind'),
+        ),
         primarySwatch: Colors.blue,
       ),
 //      initialRoute: RouteName.page1,

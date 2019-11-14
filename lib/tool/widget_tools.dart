@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class WidgetTools {
-  static Future<Rect> getWidgetRect(BuildContext context) {
+  static Future<Rect> getWidgetRect(BuildContext context)  {
     Rect rect = Rect.zero;
 
     return Future.microtask(() {
@@ -13,6 +13,21 @@ class WidgetTools {
       }
       return rect;
     });
+
+//    Rect rect = Rect.zero;
+//    var isRectGet = false;
+//
+//    WidgetsBinding.instance.addPostFrameCallback((_) {
+//      var renderObject = context.findRenderObject();
+//      if (renderObject != null) {
+//        rect = renderObject.paintBounds;
+//      }
+//      isRectGet = true;
+//    });
+//    while (!isRectGet) {
+//      await Future.delayed(Duration.zero);
+//    }
+//    return rect;
   }
 
   /// 取得元件的dx dy

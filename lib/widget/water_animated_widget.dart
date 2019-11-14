@@ -132,7 +132,9 @@ abstract class _EnterState extends State<EnterAnimationWidget> implements Ticker
             _offsetTween = Tween<Offset>(begin: beginOffset, end: Offset.zero);
             _offsetAnimation = _offsetTween.animate(curveAnimation);
           }
-          _controller.forward();
+          if (!_controller.isAnimating) {
+            _controller.forward();
+          }
         });
       } else {
         _controller.forward();

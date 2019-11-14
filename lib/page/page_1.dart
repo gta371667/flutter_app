@@ -63,7 +63,9 @@ class _Page1State extends State<Page1> with RouteMixin {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text("aa"),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
