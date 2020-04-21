@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget with RouteMixin {
 //      initialRoute: RouteName.page1,
 //      routes: {RouteName.page1: (context) => AppRouter.getPage(RouteName.page1, null)},
       /// route history routeName = "/"
-      home: getPage(RouteName.page1),
+      home: getPage(RouteName.mainPage),
       onGenerateTitle: (context) {
         return S.of(context).appName;
       },

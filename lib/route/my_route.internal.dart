@@ -6,26 +6,30 @@
 
 import 'dart:convert';
 import 'package:annotation_route/route.dart';
-import 'package:flutter_app/page/page_4.dart';
-import 'package:flutter_app/page/page_2.dart';
-import 'package:flutter_app/page/page_1.dart';
 import 'package:flutter_app/page/page_3.dart';
+import 'package:flutter_app/page/main_page.dart';
+import 'package:flutter_app/page/page_1.dart';
+import 'package:flutter_app/page/page_2.dart';
+import 'package:flutter_app/page/page_4.dart';
 
 class ARouterInternalImpl extends ARouterInternal {
   ARouterInternalImpl();
   final Map<String, List<Map<String, dynamic>>> innerRouterMap =
       <String, List<Map<String, dynamic>>>{
-    '/page4': [
-      {'clazz': Page4}
+    '/page3': [
+      {'clazz': Page3}
     ],
-    '/page2': [
-      {'clazz': Page2}
+    '/mainPage': [
+      {'clazz': MainPage}
     ],
     '/page1': [
       {'clazz': Page1}
     ],
-    '/page3': [
-      {'clazz': Page3}
+    '/page2': [
+      {'clazz': Page2}
+    ],
+    '/page4': [
+      {'clazz': Page4}
     ]
   };
 
@@ -50,14 +54,16 @@ class ARouterInternalImpl extends ARouterInternal {
 
   dynamic instanceFromClazz(Type clazz, dynamic option) {
     switch (clazz) {
-      case Page4:
-        return new Page4(option);
-      case Page2:
-        return new Page2(option);
-      case Page1:
-        return new Page1(option);
       case Page3:
         return new Page3(option);
+      case MainPage:
+        return new MainPage(option);
+      case Page1:
+        return new Page1(option);
+      case Page2:
+        return new Page2(option);
+      case Page4:
+        return new Page4(option);
       default:
         return null;
     }

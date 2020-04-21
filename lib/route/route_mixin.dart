@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/bloc/main_page_bloc.dart';
 import 'package:flutter_app/bloc/page1_bloc.dart';
 import 'package:flutter_app/bloc/page2_bloc.dart';
 import 'package:flutter_app/bloc/page3_bloc.dart';
@@ -70,7 +71,8 @@ mixin RouteMixin {
         debugPrint("canPop 已經無法再返回");
         return true;
       } else {
-        return navigator.pop(result);
+        return false;
+//        return navigator.pop(result);
       }
     }
   }
@@ -88,6 +90,11 @@ mixin RouteMixin {
     final child = AppRouter.getPage(routeName, query);
 
     switch (routeName) {
+      case RouteName.mainPage:
+        return BlocProvider(
+          child: child,
+          bloc: MainPageBloc(BlocOption(query)),
+        );
       case RouteName.page1:
         return BlocProvider(
           child: child,
@@ -108,6 +115,7 @@ mixin RouteMixin {
           child: child,
           bloc: Page4Bloc(BlocOption(query)),
         );
+
       default:
         throw ("RouteMixin 無找到對應Page");
     }
