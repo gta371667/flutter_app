@@ -5,6 +5,7 @@ import 'package:flutter_app/route/bloc_provider.dart';
 import 'package:flutter_app/route/my_route.dart';
 import 'package:flutter_app/route/route_mixin.dart';
 import 'package:flutter_app/route/route_name.dart';
+import 'package:flutter_app/tool/discount_shape.dart';
 
 @ARoute(url: RouteName.mainPage)
 class MainPage extends StatefulWidget {
@@ -29,27 +30,47 @@ class _MainPageState extends State<MainPage> with RouteMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: GridView.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-         childAspectRatio: 2,
-          children: [
-            FlatButton(
-              color: Colors.grey,
-              child: Text("page1"),
-              onPressed: () {
-                pushPage(RouteName.page1, context);
-              },
-            ),
-            FlatButton(
-              color: Colors.grey,
-              child: Text("page1"),
-              onPressed: () {
-                pushPage(RouteName.page1, context);
-              },
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 2,
+            children: [
+              Material(
+                color: Colors.orange,
+                shape: DiscountShape(
+                  count: 3,
+                  radius: Radius.circular(5),
+                ),
+                child: Align(
+                  child: Text("page1"),
+                ),
+              ),
+//              Material(
+//                color: Colors.orange,
+//                shape: Border.all(),
+//                child: Align(
+//                  child: Text("page1"),
+//                ),
+//              ),
+//              FlatButton(
+//                color: Colors.grey,
+//                child: Text("page1"),
+//                onPressed: () {
+//                  pushPage(RouteName.page1, context);
+//                },
+//              ),
+//              FlatButton(
+//                color: Colors.grey,
+//                child: Text("page1"),
+//                onPressed: () {
+//                  pushPage(RouteName.page1, context);
+//                },
+//              ),
+            ],
+          ),
         ),
       ),
     );
