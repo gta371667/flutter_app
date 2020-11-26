@@ -59,7 +59,17 @@ class _Page2State extends State<Page2> with RouteMixin {
   @override
   void initState() {
     bloc = BlocProvider.of<Page2Bloc>(context);
+
+    // ModalRoute.of(context).settings.arguments;
+
+    // var a = bloc.option.query["key1"];
+    //
+    // print("aaaa $a");
+
     super.initState();
+
+    // var a = ModalRoute.of(context);
+    // var B = ModalRoute.of(context);
   }
 
   @override

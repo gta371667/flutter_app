@@ -41,34 +41,34 @@ class _MainPageState extends State<MainPage> with RouteMixin {
               Material(
                 color: Colors.orange,
                 shape: DiscountShape(
-                  count: 3,
+                  count: 1,
                   radius: Radius.circular(5),
                 ),
                 child: Align(
                   child: Text("page1"),
                 ),
               ),
-//              Material(
-//                color: Colors.orange,
-//                shape: Border.all(),
-//                child: Align(
-//                  child: Text("page1"),
-//                ),
-//              ),
-//              FlatButton(
-//                color: Colors.grey,
-//                child: Text("page1"),
-//                onPressed: () {
-//                  pushPage(RouteName.page1, context);
-//                },
-//              ),
-//              FlatButton(
-//                color: Colors.grey,
-//                child: Text("page1"),
-//                onPressed: () {
-//                  pushPage(RouteName.page1, context);
-//                },
-//              ),
+             Material(
+               color: Colors.orange,
+               shape: Border.all(),
+               child: Align(
+                 child: Text("page1"),
+               ),
+             ),
+             FlatButton(
+               color: Colors.grey,
+               child: Text("page1"),
+               onPressed: () {
+                 pushPage(RouteName.page1, context);
+               },
+             ),
+             FlatButton(
+               color: Colors.grey,
+               child: Text("page1"),
+               onPressed: () {
+                 pushPage(RouteName.page1, context);
+               },
+             ),
             ],
           ),
         ),

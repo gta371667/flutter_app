@@ -79,7 +79,9 @@ class _Page1State extends State<Page1> with RouteMixin {
                     child: Text("page1"),
                   ),
                   onTap: () {
-                    pushPage(RouteName.page2, context, blocQuery: {"key1": "test1"});
+                    // getPage(RouteName.page2, context, blocQuery: {"key1": "test1"});
+
+                    Navigator.of(context).pushNamed(RouteName.page2, arguments: {"key1": "test1"});
                   },
                 ),
                 GestureDetector(
