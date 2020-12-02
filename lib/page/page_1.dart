@@ -70,6 +70,7 @@ class _Page1State extends State<Page1> with RouteMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
+            decoration: ShapeDecoration(shape: Border.all()),
             alignment: Alignment.center,
             child: Row(
               children: <Widget>[
